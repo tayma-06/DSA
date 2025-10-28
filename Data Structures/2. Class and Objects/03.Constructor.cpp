@@ -56,6 +56,34 @@ public:
     }
 };
 
+class Student
+{
+public: 
+    string name;
+    double* cgpaPtr;
+
+    Student(string name, double cgpa)
+    {
+        this->name = name;
+        cgpaPtr = new double; // dynamically allocate memory
+        *cgpaPtr = cgpa;
+    }
+
+    Student(const Student &obj) // copy constructor
+    {
+        this->name = obj.name;
+        cgpaPtr = new double; // allocate new memory
+        *cgpaPtr = *obj.cgpaPtr; // deep copy
+        //this->cgpaPtr = obj.cgpaPtr; // shallow copy
+    }
+
+    void displayInfo()
+    {
+        cout << "Name: " << name << endl;
+        cout << "CGPA: " << *cgpaPtr << endl;
+    }
+};
+
 int main()
 {
     Teacher t1; // default constructor is called here
@@ -83,6 +111,14 @@ int main()
 
     Teacher t5(t1); //  copy constructor is called here
     t5.displayInfo();
+
+    Student s1("John", 3.8);
+    s1.displayInfo();
+    Student s2(s1);
+    *(s2.cgpaPtr)=3.9; // copy constructor is called here
+    s2.displayInfo();
+    //s1.displayInfo(); // shows the effect of shallow copy
+    s1.displayInfo(); // shows the effect of deep copy
 
     return 0;
 }
