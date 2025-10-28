@@ -27,6 +27,16 @@ public:
         salary = newSalary;
     }
 
+    //parameterized constructor using this keyword
+
+    Teacher(string name, string dept, string subject)
+    {
+        this->name = name;
+        this->dept = dept;
+        this->subject = subject;
+        this->salary = 60000; // default salary
+    }
+
     void displayInfo()
     {
         cout << "Name: " << name << endl;
@@ -57,6 +67,9 @@ int main()
 
     t1.displayInfo();
     t3.displayInfo();
+
+    Teacher t4("Bob", "Physics", "Quantum Mechanics"); // parameterized constructor using this keyword is called here
+    t4.displayInfo();
 
     return 0;
 }
