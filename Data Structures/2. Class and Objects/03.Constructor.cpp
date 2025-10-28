@@ -37,6 +37,16 @@ public:
         this->salary = 60000; // default salary
     }
 
+    //copy constructor
+    Teacher(Teacher &obj) // pass by reference
+    {
+        cout << "Teacher copy constructor called" << endl;
+        this->name = obj.name;
+        this->dept = obj.dept;
+        this->subject = obj.subject;
+        this->salary = obj.salary;
+    }
+
     void displayInfo()
     {
         cout << "Name: " << name << endl;
@@ -70,6 +80,9 @@ int main()
 
     Teacher t4("Bob", "Physics", "Quantum Mechanics"); // parameterized constructor using this keyword is called here
     t4.displayInfo();
+
+    Teacher t5(t1); //  copy constructor is called here
+    t5.displayInfo();
 
     return 0;
 }
