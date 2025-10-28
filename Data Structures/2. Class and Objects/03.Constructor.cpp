@@ -77,6 +77,13 @@ public:
         //this->cgpaPtr = obj.cgpaPtr; // shallow copy
     }
 
+    // destructor
+    ~Student()
+    {
+        cout << "Destructor called for " << name << endl;
+        delete cgpaPtr; // free dynamically allocated memory
+    }
+
     void displayInfo()
     {
         cout << "Name: " << name << endl;
