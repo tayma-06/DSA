@@ -21,75 +21,89 @@ public:
     }
     void insert(int num)
     {
-        arr[size]=num;
+        arr[size] = num;
         size++;
     }
     int find(int num)
     {
-        int start=0, end=size-1;
-        while(start<=end)
+        int start = 0, end = size - 1;
+        while (start <= end)
         {
-            int mid=start+(end-start)/2;
-            if(arr[mid]==num)
+            int mid = (start + end) / 2;
+            if (arr[mid] == num)
                 return mid;
-            else if(arr[mid]<num)
-                start=mid+1;
+            else if (arr[mid] < num)
+                start = mid + 1;
             else
-                end=mid-1;
+                end = mid - 1;
         }
         return -1;
     }
     bool erase(int num)
     {
-        int indx=find(num);
-        if(indx==-1)
-            return false;
-        for(int i=indx;i<size-1;i++)
+        int index = find(num);
+        if (index == -1)
         {
-            arr[i]=arr[i+1];
+            cout << "Not Available So Cannot Be Erased" << endl;
+            return false;
         }
-        size--;
-        return true;
+        else
+        {
+            for (int i = index; i < size; i++)
+            {
+                arr[i] = arr[i + 1];
+            }
+            size--;
+            return true;
+        }
     }
     bool erase(int indx1, int indx2)
     {
-        if(indx1<0 || indx2>=size || indx1>indx2)
-            return false;
-        int count=indx2-indx1+1;
-        for(int i=indx1;i<size-count;i++)
+        if (indx1 < 0 || indx2 >= size || indx1 > indx2)
         {
-            arr[i]=arr[i+count];
+            cout << "Invalid values Could Not resolve" << endl;
+            return false;
         }
-        size-=count;
-        return true;
+        else
+        {
+            for (int i = indx2; i >= indx1; i--)
+                erase(arr[i]);
+            return true;
+        }
+    }
+
+    void printInfo(myIntSet mySet)
+    {
+        cout << "The Data: " << endl;
+        for (int i = 0; i < size; i++)
+        {
+            cout << arr[i] << endl;
+        }
     }
 };
 
 int main()
 {
-    myIntSet s;
-    s.insert(10);
-    s.insert(20);
-    s.insert(30);
-    s.insert(40);
-    s.insert(50);
+    myIntSet test;
+    test.insert(1);
+    test.insert(2);
+    test.insert(3);
+    test.insert(4);
+    test.insert(5);
+    test.printInfo(test);
 
-    cout << "Set elements after insertion: ";
-    for(int i=0; i<s.getSize(); i++)
-        cout << s.getElem(i) << " ";
-    cout << endl;
+    if (test.find(2) != -1)
+    {
+        cout << "Found at index: " << test.find(2) << endl;
+    }
+    else
+    {
+        cout << "Not Found" << endl;
+    }
 
-    s.erase(30);
-    cout << "Set elements after erasing 30: ";
-    for(int i=0; i<s.getSize(); i++)
-        cout << s.getElem(i) << " ";
-    cout << endl;
+    test.erase(5);
+    test.printInfo(test);
 
-    s.erase(1, 2);
-    cout << "Set elements after erasing indices 1 to 2: ";
-    for(int i=0; i<s.getSize(); i++)
-        cout << s.getElem(i) << " ";
-    cout << endl;
-
-    return 0;
+    test.erase(1, 3);
+    test.printInfo(test);
 }
