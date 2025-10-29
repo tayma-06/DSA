@@ -51,7 +51,7 @@ public:
             prev = curr;
             curr = next;
         }
-        tail = head;
+        tail = curr;
         head = prev;
     }
 
