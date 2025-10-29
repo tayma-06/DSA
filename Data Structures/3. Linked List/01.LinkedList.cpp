@@ -34,11 +34,11 @@ public:
     // pushFront
     void pushFront(int val)
     {
-        Node* newNode = new Node(val); // dynamic
-        if(head == NULL)
+        Node *newNode = new Node(val);
+        if (head == NULL)
         {
-            head = newNode;
-            tail = newNode;
+            head = tail = newNode;
+            return;
         }
         else
         {
@@ -50,77 +50,106 @@ public:
     // pushBack
     void pushBack(int val)
     {
-        Node* newNode = new Node(val);
-        if(head == NULL)
+        Node *newNode = new Node(val);
+        if (head == NULL)
         {
-            head = newNode;
-            tail = newNode;
-        } 
+            head = tail = newNode;
+            return;
+        }
         else
         {
-            tail->next = newNode; // (*tail).next = newNode;
+            tail->next = newNode;
             tail = newNode;
         }
-
     }
-    
+
     // popFront
     void popFront()
     {
-        if(head == NULL)
+        Node *temp = head;
+        if (head == NULL)
         {
-            cout << "List is empty " << endl;
+            cout << "No Data. Invalid Operation" << endl;
             return;
-        }
-        else if(head->next == NULL) // only one node
-        {
-            delete head;
-            head = NULL;
-            tail = NULL;
         }
         else
         {
-            Node* temp = head;
-            head = head->next; // head = (*head).next;
-            delete temp;
+            head = head->next; // moving the head to next element
+            temp->next = NULL; // disconnecting the first element from the list
+            delete temp;       // deleting the first element
         }
     }
 
     // popBack
     void popBack()
     {
-        if(head == NULL)
+        if (head == NULL)
         {
-            cout << "List is empty " << endl;
+            cout << "Our List is Empty. Invalid Operation" << endl;
+        }
+        Node *temp = head;
+        while (temp->next != tail)
+        {
+            temp = temp->next;
+        }
+        temp->next = NULL;
+        delete tail;
+        tail = temp;
+    }
+
+    // insert
+    void insert(int val, int pos)
+    {
+        Node *newNode = new Node(val);
+        if (pos < 0)
             return;
-        }
-        else if(head->next == NULL) // only one node
-        {
-            delete head;
-            head = NULL;
-            tail = NULL;
-        }
+        else if (pos == 0)
+            pushFront(val);
         else
         {
-            Node* temp = head;
-            while(temp->next != tail) // while((*temp).next != tail)
+            Node *temp = head;
+            for (int i = 0; i < pos - 1; i++)
             {
+                if (temp == NULL)
+                {
+                    cout << "Invalid Operation and Position";
+                    return;
+                }
                 temp = temp->next; // temp = (*temp).next;
             }
-            delete tail;
-            tail = temp;
-            tail->next = NULL; // (*tail).next = NULL;
+            newNode->next = temp->next; // (*newNode).next = (*temp).next;
+            temp->next = newNode;       // (*temp).next = newNode;
         }
+    }
+
+    // search
+    int search(int key)
+    {
+        Node *temp = head;
+        int i = 0;
+        while (temp != NULL)
+        {
+            if (temp->data == key)
+            {
+                cout << "Found at index " << i << endl;
+                return i;
+            }
+            temp = temp->next;
+            i++;
+        }
+        cout << "Not Found" << endl;
+        return -1;
     }
 
     // printList
     void printList()
     {
-        Node* temp = head;
-        while(temp != NULL)
+        Node *temp = head;
+        cout << "The data in List: ";
+        while (temp != NULL)
         {
-            cout << temp->data << " -> "; // cout << (*temp).data << " -> ";
-            temp = temp->next; // temp = (*temp).next;
+            cout << temp->data << " "; // cout << (*temp).data;
+            temp = temp->next;         // temp = (*temp).next;
         }
         cout << "NULL" << endl;
     }
@@ -148,4 +177,15 @@ int main()
     ll.popBack();
 
     ll.printList();
+
+    ll.insert(7, 2);
+    ll.insert(9, 3);
+    ll.insert(8, 0);
+
+    ll.printList();
+
+    ll.search(3);
+    ll.search(5);
+
+    return 0;
 }
