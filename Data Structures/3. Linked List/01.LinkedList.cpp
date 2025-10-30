@@ -66,18 +66,20 @@ public:
     // popFront
     void popFront()
     {
-        Node *temp = head;
         if (head == NULL)
         {
             cout << "No Data. Invalid Operation" << endl;
             return;
         }
-        else
+        else if (head == tail)
         {
-            head = head->next; // moving the head to next element
-            temp->next = NULL; // disconnecting the first element from the list
-            delete temp;       // deleting the first element
+            head = tail = NULL;
+            return;
         }
+        Node *temp = head;
+        head = head->next; // moving the head to next element
+        temp->next = NULL; // disconnecting the first element from the list
+        delete temp;       // deleting the first element
     }
 
     // popBack
@@ -86,6 +88,11 @@ public:
         if (head == NULL)
         {
             cout << "Our List is Empty. Invalid Operation" << endl;
+        }
+        else if (head == tail)
+        {
+            head = tail = NULL;
+            return;
         }
         Node *temp = head;
         while (temp->next != tail)
@@ -104,7 +111,10 @@ public:
         if (pos < 0)
             return;
         else if (pos == 0)
+        {
             pushFront(val);
+            return;
+        }
         else
         {
             Node *temp = head;
@@ -119,6 +129,10 @@ public:
             }
             newNode->next = temp->next; // (*newNode).next = (*temp).next;
             temp->next = newNode;       // (*temp).next = newNode;
+            if (newNode->next == NULL)
+            {
+                tail = newNode;
+            }
         }
     }
 
@@ -181,6 +195,7 @@ int main()
     ll.insert(7, 2);
     ll.insert(9, 3);
     ll.insert(8, 0);
+    ll.insert(3, 7);
 
     ll.printList();
 
