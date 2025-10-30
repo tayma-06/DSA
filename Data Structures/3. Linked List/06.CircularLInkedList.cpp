@@ -114,7 +114,7 @@ public:
             cout << temp->data << " ";
             temp = temp->next;
         }
-        cout << "NULL" << endl;
+        cout << "Back To Head" << endl;
     }
 };
 
