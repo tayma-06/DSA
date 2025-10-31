@@ -23,7 +23,7 @@ public:
     {
         head = tail = NULL;
     }
-    void enqueue(int val)
+    void enqueue(int val) // push
     {
         Node *newNode = new Node(val);
         if (head == NULL)
@@ -39,7 +39,7 @@ public:
         }
     }
 
-    void dequeue()
+    void dequeue() // pop
     {
         if (head == NULL)
         {
