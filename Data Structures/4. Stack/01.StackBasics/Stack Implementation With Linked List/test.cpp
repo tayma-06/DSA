@@ -1,11 +1,11 @@
 #include <iostream>
-#include "myStackArray.h"
+#include "myStackInt.h"
 
 using namespace std;
 
 int main()
 {
-    myStack st(100);
+    myStack st;
 
     st.push(1);
     st.push(2);

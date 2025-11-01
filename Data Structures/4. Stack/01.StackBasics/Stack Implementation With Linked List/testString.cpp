@@ -1,16 +1,16 @@
 #include <iostream>
-#include "myStackArray.h"
+#include <string>
+#include "myStackString.h"
 
 using namespace std;
 
 int main()
 {
-    myStack st(100);
-
-    st.push(1);
-    st.push(2);
-    st.push(3);
-    st.push(4);
+    myStack st;
+    st.push("Violet");
+    st.push("Lily");
+    st.push("Hyacinth");
+    st.push("Roses");
 
     cout << "Popped: " << st.peek() << endl;
     st.pop();
