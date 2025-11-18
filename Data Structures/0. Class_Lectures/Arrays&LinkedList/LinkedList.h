@@ -147,42 +147,6 @@ public:
         tail->next = NULL;
     }
 
-    void deleteInMiddle(int position)
-    {
-        if (position < 1 || isEmpty())
-        {
-            cout << "Invalid position\n";
-            return;
-        }
-        if (position == 1)
-        {
-            deleteAtStart();
-            return;
-        }
-
-        Node *curr = head;
-        Node *prev = NULL;
-
-        for (int i = 1; i < position && curr != NULL; i++)
-        {
-            prev = curr;
-            curr = curr->next;
-        }
-
-        if (curr == NULL)
-        {
-            cout << "Position out of range\n";
-            return;
-        }
-
-        prev->next = curr->next;
-
-        if (curr == tail)
-            tail = prev;
-
-        delete curr;
-    }
-
     void deleteAfter(int key)
     {
         if (isEmpty())

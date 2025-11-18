@@ -16,12 +16,11 @@ int main()
         cout << "4. Insert Before a Key\n";
         cout << "5. Delete at Start\n";
         cout << "6. Delete at End\n";
-        cout << "7. Delete at Position (Middle)\n";
-        cout << "8. Delete After a Key\n";
-        cout << "9. Delete Before a Key\n";
-        cout << "10. Search\n";
-        cout << "11. Display List\n";
-        cout << "12. Exit\n";
+        cout << "7. Delete After a Key\n";
+        cout << "8. Delete Before a Key\n";
+        cout << "9. Search\n";
+        cout << "10. Display List\n";
+        cout << "11. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -64,24 +63,18 @@ int main()
             break;
 
         case 7:
-            cout << "Enter position: ";
-            cin >> pos;
-            list.deleteInMiddle(pos);
-            break;
-
-        case 8:
             cout << "Enter key: ";
             cin >> key;
             list.deleteAfter(key);
             break;
 
-        case 9:
+        case 8:
             cout << "Enter key: ";
             cin >> key;
             list.deleteBefore(key);
             break;
 
-        case 10:
+        case 9:
             cout << "Enter value to search: ";
             cin >> val;
             if (list.search(val))
@@ -90,11 +83,11 @@ int main()
                 cout << "Not Found\n";
             break;
 
-        case 11:
+        case 10:
             list.display();
             break;
 
-        case 12:
+        case 11:
             cout << "Exiting...\n";
             return 0;
 
