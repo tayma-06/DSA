@@ -23,10 +23,12 @@ public:
     {
         head = tail = NULL;
     }
+
     bool isEmpty()
     {
         return head == NULL;
     }
+
     void push_front(int val)
     {
         Node *newNode = new Node(val);
@@ -38,6 +40,7 @@ public:
         newNode->next = head;
         head = newNode;
     }
+
     void push_back(int val)
     {
         Node *newNode = new Node(val);
@@ -49,6 +52,7 @@ public:
         tail->next = newNode;
         tail = newNode;
     }
+
     void push_after(int val, int key)
     {
         if (isEmpty())
@@ -74,6 +78,7 @@ public:
             tail = newNode;
         }
     }
+
     void push_before(int val, int key)
     {
         if (isEmpty())
@@ -102,6 +107,7 @@ public:
         prev->next = newNode;
         newNode->next = curr;
     }
+
     void pop_front()
     {
         if (isEmpty())
@@ -119,6 +125,7 @@ public:
         head = head->next;
         delete temp;
     }
+
     void pop_back()
     {
         if (isEmpty())
@@ -141,6 +148,7 @@ public:
         tail = temp;
         tail->next = NULL;
     }
+
     void pop_after(int key)
     {
         if (isEmpty())
@@ -167,6 +175,7 @@ public:
         }
         delete delNode;
     }
+
     void pop_before(int key)
     {
         if (isEmpty() || head->data == key)
@@ -191,6 +200,21 @@ public:
         prev_prev->next = curr;
         delete prev;
     }
+
+    bool search(int key)
+    {
+        Node *temp = head;
+        while (temp != NULL)
+        {
+            if (temp->data == key)
+            {
+                return true;
+            }
+            temp = temp->next;
+        }
+        return false;
+    }
+
     void display()
     {
         if (isEmpty())
