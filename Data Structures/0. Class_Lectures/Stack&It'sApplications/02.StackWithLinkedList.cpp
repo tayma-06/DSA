@@ -1,0 +1,11 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class myStack
+{
+};
+
+int main()
+{
+    return;
+}
