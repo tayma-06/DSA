@@ -9,7 +9,6 @@ int main()
     st.push(2);
     st.push(1);
 
-    // Method 1: Print by copying to another container
     stack<int> temp = st;
     cout << "Original stack (top to bottom): ";
     while (!temp.empty())
@@ -19,9 +18,8 @@ int main()
     }
     cout << endl;
 
-    // Method 2: Reverse the stack using another stack
     stack<int> reversed;
-    temp = st; // Make a copy
+    temp = st;
     while (!temp.empty())
     {
         reversed.push(temp.top());
