@@ -19,7 +19,7 @@ public:
     {
         if (isEmpty())
         {
-            cout << "No jobs to run.\n";
+            cout << "No jobs to run." << endl;
             return;
         }
         cout << "Running job: " << jobs.front() << endl;
@@ -29,7 +29,7 @@ public:
     {
         if (isEmpty())
         {
-            cout << "No pending jobs.\n";
+            cout << "No pending jobs." << endl;
             return;
         }
         queue<string> temp = jobs;
@@ -39,7 +39,7 @@ public:
             cout << temp.front() << " -> ";
             temp.pop();
         }
-        cout << "NULL\n";
+        cout << "NULL" << endl;
     }
     int countJobs()
     {

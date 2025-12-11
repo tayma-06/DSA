@@ -1,45 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class priorityQueue
+class PriorityQueue
 {
-    static const int MAXP = 5;
-    queue<int> pq[MAXP];
+    queue<int> priorityList[6];
 
 public:
     bool isEmpty()
     {
-        for (int i = 0; i < MAXP; i++)
+        for (int i = 0; i < 6; i++)
         {
-            if (!pq[i].empty())
+            if (!priorityList[i].empty())
                 return false;
         }
         return true;
     }
 
-    void enqueue(int val, int prio)
+    void enqueue(int value, int priority)
     {
-        if (prio < 0 || prio >= MAXP)
+        if (priority < 0 || priority >= 6)
         {
-            cout << "Invalid priority\n";
+            cout << "Invalid priority level" << endl;
             return;
         }
-        pq[prio].push(val);
+        priorityList[priority].push(value);
     }
 
     void dequeue()
     {
         if (isEmpty())
         {
-            cout << "The queue is empty\n";
+            cout << "Queue is empty" << endl;
             return;
         }
 
-        for (int i = 0; i < MAXP; i++)
+        for (int i = 0; i < 6; i++)
         {
-            if (!pq[i].empty())
+            if (!priorityList[i].empty())
             {
-                pq[i].pop();
+                priorityList[i].pop();
                 return;
             }
         }
@@ -49,15 +48,15 @@ public:
     {
         if (isEmpty())
         {
-            cout << "The queue is empty\n";
+            cout << "Queue is empty" << endl;
             return -1;
         }
-        for (int i = 0; i < MAXP; i++)
-        {
-            if (!pq[i].empty())
-                return pq[i].front();
-        }
 
+        for (int i = 0; i < 6; i++)
+        {
+            if (!priorityList[i].empty())
+                return priorityList[i].front();
+        }
         return -1;
     }
 
@@ -65,23 +64,25 @@ public:
     {
         if (isEmpty())
         {
-            cout << "The queue is empty\n";
+            cout << "Queue is empty" << endl;
             return -1;
         }
-        for (int i = MAXP - 1; i >= 0; i--)
+
+        for (int i = 5; i >= 0; i--)
         {
-            if (!pq[i].empty())
-                return pq[i].back();
+            if (!priorityList[i].empty())
+                return priorityList[i].back();
         }
         return -1;
     }
 
     void display()
     {
-        for (int i = 0; i < MAXP; i++)
+        for (int i = 0; i < 6; i++)
         {
-            queue<int> temp = pq[i];
             cout << "Priority " << i << ": ";
+            queue<int> temp = priorityList[i];
+
             while (!temp.empty())
             {
                 cout << temp.front() << " ";
@@ -91,33 +92,34 @@ public:
         }
     }
 
-    int sizeOf()
+    int totalSize()
     {
-        int size = 0;
-        for (int i = 0; i < MAXP; i++)
-        {
-            size += pq[i].size();
-        }
-        return size;
+        int total = 0;
+        for (int i = 0; i < 6; i++)
+            total += priorityList[i].size();
+        return total;
     }
 };
 
 int main()
 {
-    priorityQueue pq;
+    PriorityQueue pq;
+
     pq.enqueue(10, 3);
     pq.enqueue(20, 1);
     pq.enqueue(30, 2);
     pq.enqueue(40, 1);
-    pq.enqueue(50, 4);
+    pq.enqueue(50, 5);
+
     pq.display();
     cout << endl;
+
     pq.dequeue();
     pq.display();
-    cout << endl;
+
     cout << "Front: " << pq.getFront() << endl;
     cout << "Rear: " << pq.getRear() << endl;
-    cout << "Size: " << pq.sizeOf() << endl;
+    cout << "Total Size: " << pq.totalSize() << endl;
 
     return 0;
 }
