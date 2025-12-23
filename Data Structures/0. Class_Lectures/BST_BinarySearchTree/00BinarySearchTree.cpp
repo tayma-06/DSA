@@ -10,6 +10,7 @@ public:
     Node(int val)
     {
         data = val;
+        left = right = NULL;
     }
 };
 
@@ -29,6 +30,24 @@ Node *search(Node *root, int val)
     }
 }
 
+Node *findSmallestNode(Node *root)
+{
+    if (root == NULL)
+    {
+        return root;
+    }
+    return findSmallestNode(root->left);
+}
+
+Node *findLargestNode(Node *root)
+{
+    if (root == NULL)
+    {
+        return root;
+    }
+    return findLargestNode(root->right);
+}
+
 Node *insert(Node *root, int val)
 {
     if (root == NULL)
@@ -44,15 +63,6 @@ Node *insert(Node *root, int val)
         root->right = insert(root->right, val);
     }
     return root;
-}
-
-Node *findLargestNode(Node *root)
-{
-    if (root == NULL)
-    {
-        return root;
-    }
-    return findLargestNode(root->right);
 }
 
 Node *deleteNode(Node *root, int val)
@@ -94,58 +104,40 @@ Node *deleteNode(Node *root, int val)
     return root;
 }
 
-Node *findSmallestNode(Node *root)
+int height(Node *root)
 {
     if (root == NULL)
-    {
-        return root;
-    }
-    return findSmallestNode(root->left);
-}
-
-Node *findLargestNode(Node *root)
-{
-    if (root == NULL)
-    {
-        return root;
-    }
-    return findLargestNode(root->right);
-}
-
-int height(Node* root)
-{
-    if(root == NULL)
     {
         return 0;
     }
     return max(height(root->left) + 1, height(root->right) + 1);
 }
 
-int totalNodes(Node* root)
+int totalNodes(Node *root)
 {
-    if(root == NULL)
+    if (root == NULL)
     {
         return 0;
     }
     return (totalNodes(root->left) + totalNodes(root->right) + 1);
 }
 
-int totalExternalNodes(Node* root)
+int totalExternalNodes(Node *root)
 {
-    if(root==NULL)
+    if (root == NULL)
     {
         return 0;
     }
-    if(root->left == NULL && root->right == NULL)
+    if (root->left == NULL && root->right == NULL)
     {
         return 1;
     }
     return (totalExternalNodes(root->left) + totalExternalNodes(root->right));
 }
 
-int totalInternalNodes(Node* root)
+int totalInternalNodes(Node *root)
 {
-    if((root==NULL) || (root->left == NULL && root->right == NULL))
+    if ((root == NULL) || (root->left == NULL && root->right == NULL))
     {
         return 0;
     }
@@ -156,8 +148,10 @@ int main()
 {
     Node *root = NULL;
     int n;
+
     cout << "Enter number of Nodes: ";
     cin >> n;
+
     cout << "Enter the values: " << endl;
     for (int i = 0; i < n; i++)
     {
@@ -165,23 +159,26 @@ int main()
         cin >> val;
         root = insert(root, val);
     }
+
     cout << "Height of the Tree: " << height(root) << endl;
     cout << "Total nodes: " << totalNodes(root) << endl;
     cout << "Total external (leaf) nodes: " << totalExternalNodes(root) << endl;
     cout << "Total internal nodes: " << totalInternalNodes(root) << endl;
+
     int key;
     cout << "Enter a value to search in the tree: ";
     cin >> key;
-    if(search(root, key))
-    {
-        cout << "Found! :D" << endl;
-    }
+
+    if (search(root, key))
+        cout << "Found! :D\n";
     else
-    {
-        cout << "Not Found! :(" << endl;
-    }
+        cout << "Not Found! :(\n";
+
     int del;
     cout << "Enter value to delete: ";
     cin >> del;
-    root = deleteNode (root, del);
+
+    root = deleteNode(root, del);
+
+    return 0;
 }
