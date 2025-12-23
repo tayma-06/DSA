@@ -164,6 +164,8 @@ int main()
     cout << "Total nodes: " << totalNodes(root) << endl;
     cout << "Total external (leaf) nodes: " << totalExternalNodes(root) << endl;
     cout << "Total internal nodes: " << totalInternalNodes(root) << endl;
+    cout << "Maximum Value: " << findLargestNode(root)->data << endl;
+    cout << "Minimum Value: " << findSmallestNode(root)->data << endl;
 
     int key;
     cout << "Enter a value to search in the tree: ";
