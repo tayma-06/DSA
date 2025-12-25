@@ -342,14 +342,14 @@ public:
         int rightHeight = (node->right) ? node->right->height : -1;
         node->height = max(leftHeight, rightHeight) + 1;
     }
-    void updateHeight(Node *node)
-    {
-        while (node != NULL)
-        {
-            updateSingleNodeHeight(node);
-            node = node->parent;
-        }
-    }
+    // void updateHeight(Node *node)
+    // {
+    //     while (node != NULL)
+    //     {
+    //         updateSingleNodeHeight(node);
+    //         node = node->parent;
+    //     }
+    // }
     // Task 03
     Node *find(Node *node, int val)
     {
