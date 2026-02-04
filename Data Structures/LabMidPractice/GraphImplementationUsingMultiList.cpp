@@ -7,11 +7,12 @@ public:
     int u, v;
     Edge *nextU;
     Edge *nextV;
+
     Edge(int u, int v)
     {
         this->u = u;
         this->v = v;
-        nextU = nextV = NULL;
+        nextU = nextV = nullptr;
     }
 };
 
@@ -20,10 +21,11 @@ class Vertex
 public:
     int data;
     Edge *firstEdge;
-    Vertex(int d)
+
+    Vertex(int data)
     {
-        data = d;
-        firstEdge = NULL;
+        this->data = data;
+        firstEdge = nullptr;
     }
 };
 
@@ -36,27 +38,30 @@ public:
     Graph(int V)
     {
         this->V = V;
-        vertices.resize(V);
         for (int i = 0; i < V; i++)
         {
-            vertices[i] = Vertex(i);
+            vertices.emplace_back(i);
         }
     }
+
     void addEdge(int u, int v)
     {
-        // Undirected
         Edge *e = new Edge(u, v);
+
         e->nextU = vertices[u].firstEdge;
         vertices[u].firstEdge = e;
+
         e->nextV = vertices[v].firstEdge;
         vertices[v].firstEdge = e;
     }
-    void print()
+
+    void printGraph()
     {
         for (int i = 0; i < V; i++)
         {
-            cout << "Vertex " << i << "->";
+            cout << "Vertex " << i << " -> ";
             Edge *e = vertices[i].firstEdge;
+
             while (e)
             {
                 if (e->u == i)
@@ -82,6 +87,6 @@ int main()
     g.addEdge(1, 2);
     g.addEdge(2, 3);
     g.addEdge(0, 3);
-    g.print();
+    g.printGraph();
     return 0;
 }
